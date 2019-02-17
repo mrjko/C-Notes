@@ -1,25 +1,32 @@
 #include <stdio.h>
-#include <main.h>
+#include "main.h"
 #include <stdlib.h>
 #include "TreeNode.h"
 
 void helloWorld(void) {
 
-  printf("Hello makefiles!\n");
+	printf("Hello makefiles!\n");
 
-  struct TreeNode l = {2};
-  struct TreeNode r = {13};
+	struct TreeNode l = {2};
+	struct TreeNode r = {13};
+	struct TreeNode root = {5, &l, &r};
+	printTreeNode(&root, 0); 
+	convertBST(&root);
+	printTreeNode(&root, 0); 
 
-  struct TreeNode root = {5, &l, &r};
+	TreeNode2 ll2 = {4};
+	TreeNode2 lr2 = {5};
+	TreeNode2 rl2 = {6};
+	TreeNode2 l2  = {2, &ll2, &lr2};
+	TreeNode2 r2  = {3, &rl2};
+	TreeNode2 root2 = {1, &l2, &r2};
 
-  printTreeNode(&root, 0); 
- 	
-  convertBST(&root);
+	printf("\n");
 
-  printTreeNode(&root, 0); 
+	printTreeNode2Inorder(&root2); 
 
-  printf("\n");
-  return;
+	printf("\n");
+	return;
 }
 
 int sum = 0;
@@ -50,6 +57,14 @@ void printTreeNodeInorder(struct TreeNode *root) {
 	printf("%d ", root->val);
 	if (root->right != NULL)
 		printTreeNodeInorder(root->right);
+}
+
+void printTreeNode2Inorder(TreeNode2 *root) {
+	if (root->left != NULL) 
+		printTreeNode2Inorder(root->left);
+	printf("%d ", root->val);
+	if (root->right != NULL)
+		printTreeNode2Inorder(root->right);
 }
 
 void printTreeNodePostorder(struct TreeNode *root) {
